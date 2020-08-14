@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :friendees, through: :friending_joins
 
   has_many :runs
+  has_one :user_preference
 
   # NAME VALIDATIONS
   validates :name,  presence: true, length: { maximum: 50 }
