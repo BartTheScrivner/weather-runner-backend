@@ -6,6 +6,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :password_digest
       t.integer :weekly_run_quota
       t.string :location
+      t.string :img_url
 
       t.timestamps
     end
