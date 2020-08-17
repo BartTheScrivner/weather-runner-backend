@@ -4,7 +4,7 @@ Rails.application.routes.draw do
       resources :user_preferences, 
       resources :friendships, 
       resources :runs, 
-      resources :users, :except[:create]
+      resources :users, except: :create
     end
   end
 
