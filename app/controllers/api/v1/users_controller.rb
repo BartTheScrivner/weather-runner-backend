@@ -3,6 +3,7 @@ class Api::V1::UsersController < ApplicationController
   def create
     user = User.new(user_params)
     if user.save
+      UserPreference.new(user_id: user.id)
       render json: {user: UserSerializer.new(user), token: encode_token({user_id: user.id})}
     else
       render json: {errors: "OH NO! > o < "}
@@ -15,17 +16,15 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def update
-
-  end
-
-  def destroy
-
+    user = User.find(params[:id])
+    user.update(user_params)
+    render json: {user: UserSerializer.new(user), token: encode_token({user_id: user.id})}
   end
 
   private 
 
   def user_params
-    params.permit(:name, :email, :password, :password_confirmation, :weekly_run_quota, :bio, :location)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :weekly_run_quota, :bio, :location, :img_url)
   end
 
 end
