@@ -10,7 +10,8 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-
+    user = User.find(params[:id])
+    render json: {user: UserSerializer.new(user), token: encode_token({user_id: user.id})}
   end
 
   def update
@@ -24,7 +25,7 @@ class Api::V1::UsersController < ApplicationController
   private 
 
   def user_params
-    params.permit(:name, :email, :password, :password_confirmation, :weekly_run_quota, :location)
+    params.permit(:name, :email, :password, :password_confirmation, :weekly_run_quota, :bio, :location)
   end
 
 end

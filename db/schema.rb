@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_16_201509) do
+ActiveRecord::Schema.define(version: 2020_08_14_224628) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,15 +39,16 @@ ActiveRecord::Schema.define(version: 2020_08_16_201509) do
   end
 
   create_table "user_preferences", force: :cascade do |t|
-    t.float "pop"
-    t.float "temp"
-    t.integer "humidity"
-    t.integer "visibility"
-    t.float "wind_speed"
-    t.string "cloud_cover"
+    t.float "pop", default: 0.6, null: false
+    t.float "min_temp", default: 40.0, null: false
+    t.float "max_temp", default: 90.0, null: false
+    t.integer "humidity", default: 70, null: false
+    t.integer "visibility", default: 0, null: false
+    t.float "wind_speed", default: 0.0, null: false
+    t.string "cloud_cover", default: "Rain", null: false
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_user_preferences_on_user_id"
   end
 
@@ -55,12 +56,12 @@ ActiveRecord::Schema.define(version: 2020_08_16_201509) do
     t.string "name"
     t.string "email"
     t.string "password_digest"
-    t.integer "weekly_run_quota"
+    t.integer "weekly_run_quota", default: 3, null: false
+    t.string "bio"
     t.string "location"
     t.string "img_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "user_preferences", "users"
 end

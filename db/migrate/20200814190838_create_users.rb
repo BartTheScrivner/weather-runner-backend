@@ -4,7 +4,8 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :name
       t.string :email
       t.string :password_digest
-      t.integer :weekly_run_quota
+      t.integer :weekly_run_quota, :null => false, :default => 3
+      t.string :bio
       t.string :location
       t.string :img_url
 
