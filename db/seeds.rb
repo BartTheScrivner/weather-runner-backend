@@ -14,7 +14,7 @@ Friendship.destroy_all
 friend_array = ["Ian", "Luis", "Danny", "Tien", "David", "JR", "Andy", "Issa", "Steve", "Esther", "Marcos", "Diego", "Shawn", "Michael Jester", "Mike Causey" ]
 
 friend_array.forEach |friend| do 
-User.create(
+friend = User.create(
   name: `#{friend}`,
   email: `fake#{friend}@gmail.com`,
   password:"foobar",
